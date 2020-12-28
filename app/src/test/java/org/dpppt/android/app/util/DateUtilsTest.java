@@ -3,6 +3,7 @@ package org.dpppt.android.app.util;
 import org.junit.Test;
 
 import java.util.Calendar;
+import java.util.Date;
 
 import static org.junit.Assert.*;
 
@@ -10,7 +11,7 @@ public class DateUtilsTest {
 
     @Test
     public void sum() {
-        int sum = DateUtils.topla(2, 3);
+        int sum = DateUtils.sum(2, 3);
         assertEquals(sum, 5);
     }
 
@@ -24,13 +25,25 @@ public class DateUtilsTest {
 
     @Test
     public void getDaysDiffUntil() {
+        Calendar calendar = Calendar.getInstance();
+        calendar.add(Calendar.DATE, -8);
+        int diff = DateUtils.getDaysDiffUntil(calendar.getTimeInMillis(), 5);
+        assertEquals(diff, -3);
     }
 
     @Test
     public void getFormattedDateTime() {
+        Date dt = new Date(120, 11, 28, 9, 30, 54);
+
+        String diff = DateUtils.getFormattedDateTime(dt.getTime());
+        assertEquals(diff, "Dec 28, 2020 9:30:54 AM");
     }
 
     @Test
     public void getFormattedDate() {
+        Date dt = new Date(120, 11, 28);
+
+        String diff = DateUtils.getFormattedDate(dt.getTime());
+        assertEquals(diff, "Dec 28, 2020");
     }
 }
