@@ -27,37 +27,6 @@ import static org.junit.Assert.*;
 
 public class StringUtilTest {
 
-    Context context;
-    MockWebServer server;
-    TestDriver testDriver;
-
-    @Before
-    public void setup() throws IOException {
-        context = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        Logger.init(context, LogLevel.DEBUG);
-
-        // Initialize WorkManager for instrumentation tests.
-        Configuration config = new Configuration.Builder()
-                // Set log level to Log.DEBUG to make it easier to debug
-                .setMinimumLoggingLevel(Log.DEBUG)
-                .setExecutor(new SynchronousExecutor())
-                .build();
-        WorkManagerTestInitHelper.initializeTestWorkManager(context, config);
-
-        testDriver = WorkManagerTestInitHelper.getTestDriver(context);
-
-        server = new MockWebServer();
-        server.start();
-
-        AppConfigManager appConfigManager = AppConfigManager.getInstance(context);
-        DP3T.init(context, new ApplicationInfo("my-app-id", server.url("/bucket/").toString(), server.url("/report/").toString()),
-                null);
-        // appConfigManager.setTracingEnabled(false);
-        // DP3T.clearData(context, () -> {});
-        DP3T.init(context, new ApplicationInfo("my-app-id", server.url("/bucket/").toString(), server.url("/report/").toString()),
-                null);
-        // appConfigManager.setTracingEnabled(true);
-    }
 
     @Test
     public void makePartiallyBold() {

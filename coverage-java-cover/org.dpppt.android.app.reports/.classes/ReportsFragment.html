@@ -1,0 +1,562 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: ReportsFragment</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.dpppt.android.app.reports</a> ]
+</div>
+
+<h1>Coverage Summary for Class: ReportsFragment (org.dpppt.android.app.reports)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">ReportsFragment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 144)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">ReportsFragment$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReportsFragment$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">ReportsFragment$ReportsSlidePageAdapter</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 45)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 32)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 193)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (c) 2020 Ubique Innovation AG &lt;https://www.ubique.ch&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This Source Code Form is subject to the terms of the Mozilla Public
+<i>5</i>&nbsp; * License, v. 2.0. If a copy of the MPL was not distributed with this
+<i>6</i>&nbsp; * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * SPDX-License-Identifier: MPL-2.0
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;package org.dpppt.android.app.reports;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import android.app.NotificationManager;
+<i>13</i>&nbsp;import android.content.Context;
+<i>14</i>&nbsp;import android.content.Intent;
+<i>15</i>&nbsp;import android.graphics.Rect;
+<i>16</i>&nbsp;import android.net.Uri;
+<i>17</i>&nbsp;import android.os.Bundle;
+<i>18</i>&nbsp;import android.util.Pair;
+<i>19</i>&nbsp;import android.view.View;
+<i>20</i>&nbsp;import android.view.ViewGroup;
+<i>21</i>&nbsp;import android.widget.Button;
+<i>22</i>&nbsp;import android.widget.FrameLayout;
+<i>23</i>&nbsp;import android.widget.TextView;
+<i>24</i>&nbsp;import androidx.annotation.NonNull;
+<i>25</i>&nbsp;import androidx.annotation.Nullable;
+<i>26</i>&nbsp;import androidx.annotation.StringRes;
+<i>27</i>&nbsp;import androidx.appcompat.widget.Toolbar;
+<i>28</i>&nbsp;import androidx.fragment.app.Fragment;
+<i>29</i>&nbsp;import androidx.lifecycle.ViewModelProvider;
+<i>30</i>&nbsp;import androidx.transition.AutoTransition;
+<i>31</i>&nbsp;import androidx.transition.Transition;
+<i>32</i>&nbsp;import androidx.transition.TransitionManager;
+<i>33</i>&nbsp;import androidx.viewpager2.adapter.FragmentStateAdapter;
+<i>34</i>&nbsp;import androidx.viewpager2.widget.ViewPager2;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;import java.util.ArrayList;
+<i>37</i>&nbsp;import java.util.List;
+<i>38</i>&nbsp;import java.util.TimeZone;
+<i>39</i>&nbsp;
+<i>40</i>&nbsp;import org.dpppt.android.app.R;
+<i>41</i>&nbsp;import org.dpppt.android.app.storage.SecureStorage;
+<i>42</i>&nbsp;import org.dpppt.android.app.util.DateUtils;
+<i>43</i>&nbsp;import org.dpppt.android.app.util.NotificationUtil;
+<i>44</i>&nbsp;import org.dpppt.android.app.util.PhoneUtil;
+<i>45</i>&nbsp;import org.dpppt.android.app.viewmodel.TracingViewModel;
+<i>46</i>&nbsp;import org.dpppt.android.sdk.internal.database.models.ExposureDay;
+<i>47</i>&nbsp;
+<b class="nc"><i>48</i>&nbsp;public class ReportsFragment extends Fragment {</b>
+<i>49</i>&nbsp;
+<i>50</i>&nbsp;	public static ReportsFragment newInstance() {
+<b class="nc"><i>51</i>&nbsp;		return new ReportsFragment();</b>
+<i>52</i>&nbsp;	}
+<i>53</i>&nbsp;
+<i>54</i>&nbsp;	private TracingViewModel tracingViewModel;
+<i>55</i>&nbsp;	private SecureStorage secureStorage;
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;	private ReportsSlidePageAdapter pagerAdapter;
+<i>58</i>&nbsp;
+<i>59</i>&nbsp;	private ViewPager2 headerViewPager;
+<i>60</i>&nbsp;	private LockableScrollView scrollView;
+<i>61</i>&nbsp;	private View scrollViewFirstchild;
+<i>62</i>&nbsp;	private CirclePageIndicator circlePageIndicator;
+<i>63</i>&nbsp;
+<i>64</i>&nbsp;	private View healthyView;
+<i>65</i>&nbsp;	private View saveOthersView;
+<i>66</i>&nbsp;	private View hotlineView;
+<i>67</i>&nbsp;	private View infectedView;
+<i>68</i>&nbsp;
+<i>69</i>&nbsp;	private TextView callHotlineLastText1;
+<i>70</i>&nbsp;	private TextView callHotlineLastText2;
+<i>71</i>&nbsp;	private TextView daysLeftText1;
+<i>72</i>&nbsp;	private TextView daysLeftText2;
+<i>73</i>&nbsp;
+<b class="nc"><i>74</i>&nbsp;	private boolean hotlineJustCalled = false;</b>
+<i>75</i>&nbsp;
+<b class="nc"><i>76</i>&nbsp;	private int originalFirstChildPadding = 0;</b>
+<i>77</i>&nbsp;
+<i>78</i>&nbsp;	public ReportsFragment() { super(R.layout.fragment_reports); }
+<i>79</i>&nbsp;
+<i>80</i>&nbsp;	@Override
+<i>81</i>&nbsp;	public void onCreate(@Nullable Bundle savedInstanceState) {
+<b class="nc"><i>82</i>&nbsp;		super.onCreate(savedInstanceState);</b>
+<i>83</i>&nbsp;
+<b class="nc"><i>84</i>&nbsp;		tracingViewModel = new ViewModelProvider(requireActivity()).get(TracingViewModel.class);</b>
+<b class="nc"><i>85</i>&nbsp;		secureStorage = SecureStorage.getInstance(getContext());</b>
+<i>86</i>&nbsp;	}
+<i>87</i>&nbsp;
+<i>88</i>&nbsp;	@Override
+<i>89</i>&nbsp;	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+<b class="nc"><i>90</i>&nbsp;		Toolbar toolbar = view.findViewById(R.id.reports_toolbar);</b>
+<b class="nc"><i>91</i>&nbsp;		toolbar.setNavigationOnClickListener(v -&gt; getParentFragmentManager().popBackStack());</b>
+<i>92</i>&nbsp;
+<b class="nc"><i>93</i>&nbsp;		headerViewPager = view.findViewById(R.id.reports_header_viewpager);</b>
+<b class="nc"><i>94</i>&nbsp;		scrollView = view.findViewById(R.id.reports_scrollview);</b>
+<b class="nc"><i>95</i>&nbsp;		scrollViewFirstchild = view.findViewById(R.id.reports_scrollview_firstChild);</b>
+<b class="nc"><i>96</i>&nbsp;		circlePageIndicator = view.findViewById(R.id.reports_pageindicator);</b>
+<i>97</i>&nbsp;
+<b class="nc"><i>98</i>&nbsp;		healthyView = view.findViewById(R.id.reports_healthy);</b>
+<b class="nc"><i>99</i>&nbsp;		saveOthersView = view.findViewById(R.id.reports_save_others);</b>
+<b class="nc"><i>100</i>&nbsp;		hotlineView = view.findViewById(R.id.reports_hotline);</b>
+<b class="nc"><i>101</i>&nbsp;		infectedView = view.findViewById(R.id.reports_infected);</b>
+<i>102</i>&nbsp;
+<b class="nc"><i>103</i>&nbsp;		callHotlineLastText1 = hotlineView.findViewById(R.id.card_encounters_last_call);</b>
+<b class="nc"><i>104</i>&nbsp;		callHotlineLastText2 = saveOthersView.findViewById(R.id.card_encounters_last_call);</b>
+<b class="nc"><i>105</i>&nbsp;		daysLeftText1 = hotlineView.findViewById(R.id.card_encounters_days_left);</b>
+<b class="nc"><i>106</i>&nbsp;		daysLeftText2 = saveOthersView.findViewById(R.id.card_encounters_days_left);</b>
+<i>107</i>&nbsp;
+<b class="nc"><i>108</i>&nbsp;		Button callHotlineButton1 = hotlineView.findViewById(R.id.card_encounters_button);</b>
+<b class="nc"><i>109</i>&nbsp;		Button callHotlineButton2 = saveOthersView.findViewById(R.id.card_encounters_button);</b>
+<i>110</i>&nbsp;
+<b class="nc"><i>111</i>&nbsp;		callHotlineButton1.setOnClickListener(view1 -&gt; callHotline());</b>
+<b class="nc"><i>112</i>&nbsp;		callHotlineButton2.setOnClickListener(view1 -&gt; callHotline());</b>
+<i>113</i>&nbsp;
+<b class="nc"><i>114</i>&nbsp;		View link1 = infectedView.findViewById(R.id.card_encounters_link);</b>
+<b class="nc"><i>115</i>&nbsp;		View link2 = hotlineView.findViewById(R.id.card_encounters_link);</b>
+<b class="nc"><i>116</i>&nbsp;		View link3 = saveOthersView.findViewById(R.id.card_encounters_link);</b>
+<b class="nc"><i>117</i>&nbsp;		View link4 = healthyView.findViewById(R.id.card_encounters_link);</b>
+<i>118</i>&nbsp;
+<b class="nc"><i>119</i>&nbsp;		link1.setOnClickListener(v -&gt; openLink(R.string.meldungen_explanation_link_url));</b>
+<b class="nc"><i>120</i>&nbsp;		link2.setOnClickListener(v -&gt; openLink(R.string.meldungen_explanation_link_url));</b>
+<b class="nc"><i>121</i>&nbsp;		link3.setOnClickListener(v -&gt; openLink(R.string.meldungen_explanation_link_url));</b>
+<b class="nc"><i>122</i>&nbsp;		link4.setOnClickListener(v -&gt; openLink(R.string.no_meldungen_box_url));</b>
+<i>123</i>&nbsp;
+<b class="nc"><i>124</i>&nbsp;		pagerAdapter = new ReportsSlidePageAdapter();</b>
+<b class="nc"><i>125</i>&nbsp;		headerViewPager.setAdapter(pagerAdapter);</b>
+<b class="nc"><i>126</i>&nbsp;		circlePageIndicator.setViewPager(headerViewPager);</b>
+<i>127</i>&nbsp;
+<b class="nc"><i>128</i>&nbsp;		tracingViewModel.getAppStatusLiveData().observe(getViewLifecycleOwner(), tracingStatusInterface -&gt; {</b>
+<i>129</i>&nbsp;
+<b class="nc"><i>130</i>&nbsp;			healthyView.setVisibility(View.GONE);</b>
+<b class="nc"><i>131</i>&nbsp;			saveOthersView.setVisibility(View.GONE);</b>
+<b class="nc"><i>132</i>&nbsp;			hotlineView.setVisibility(View.GONE);</b>
+<b class="nc"><i>133</i>&nbsp;			infectedView.setVisibility(View.GONE);</b>
+<i>134</i>&nbsp;
+<b class="nc"><i>135</i>&nbsp;			List&lt;Pair&lt;ReportsPagerFragment.Type, Long&gt;&gt; items = new ArrayList&lt;&gt;();</b>
+<b class="nc"><i>136</i>&nbsp;			if (tracingStatusInterface.isReportedAsInfected()) {</b>
+<b class="nc"><i>137</i>&nbsp;				infectedView.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>138</i>&nbsp;				items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.POSITIVE_TESTED, secureStorage.getInfectedDate()));</b>
+<b class="nc"><i>139</i>&nbsp;			} else if (tracingStatusInterface.wasContactReportedAsExposed()) {</b>
+<b class="nc"><i>140</i>&nbsp;				List&lt;ExposureDay&gt; exposureDays = tracingStatusInterface.getExposureDays();</b>
+<b class="nc"><i>141</i>&nbsp;				boolean isHotlineCallPending = secureStorage.isHotlineCallPending();</b>
+<b class="nc"><i>142</i>&nbsp;				if (isHotlineCallPending) {</b>
+<b class="nc"><i>143</i>&nbsp;					hotlineView.setVisibility(View.VISIBLE);</b>
+<i>144</i>&nbsp;				} else {
+<b class="nc"><i>145</i>&nbsp;					saveOthersView.setVisibility(View.VISIBLE);</b>
+<i>146</i>&nbsp;				}
+<b class="nc"><i>147</i>&nbsp;				daysLeftText1.setVisibility(View.GONE);</b>
+<b class="nc"><i>148</i>&nbsp;				daysLeftText2.setVisibility(View.GONE);</b>
+<b class="nc"><i>149</i>&nbsp;				for (int i = 0; i &lt; exposureDays.size(); i++) {</b>
+<b class="nc"><i>150</i>&nbsp;					ExposureDay exposureDay = exposureDays.get(i);</b>
+<b class="nc"><i>151</i>&nbsp;					long exposureTimestamp = exposureDay.getExposedDate().getStartOfDay(TimeZone.getDefault());</b>
+<b class="nc"><i>152</i>&nbsp;					if (i == 0) {</b>
+<b class="nc"><i>153</i>&nbsp;						items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.POSSIBLE_INFECTION, exposureTimestamp));</b>
+<b class="nc"><i>154</i>&nbsp;						int daysDiff = DateUtils.getDaysDiffUntil(exposureTimestamp, 10);</b>
+<b class="nc"><i>155</i>&nbsp;						if (daysDiff == 1) {</b>
+<b class="nc"><i>156</i>&nbsp;							daysLeftText1.setText(R.string.date_in_one_day);</b>
+<b class="nc"><i>157</i>&nbsp;							daysLeftText2.setText(R.string.date_in_one_day);</b>
+<b class="nc"><i>158</i>&nbsp;							daysLeftText1.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>159</i>&nbsp;							daysLeftText2.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>160</i>&nbsp;						} else if (daysDiff &gt; 1) {</b>
+<b class="nc"><i>161</i>&nbsp;							String dateStr = getString(R.string.date_in_days).replace(&quot;{COUNT}&quot;, String.valueOf(daysDiff));</b>
+<b class="nc"><i>162</i>&nbsp;							daysLeftText1.setText(dateStr);</b>
+<b class="nc"><i>163</i>&nbsp;							daysLeftText2.setText(dateStr);</b>
+<b class="nc"><i>164</i>&nbsp;							daysLeftText1.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>165</i>&nbsp;							daysLeftText2.setVisibility(View.VISIBLE);</b>
+<i>166</i>&nbsp;						}
+<b class="nc"><i>167</i>&nbsp;					} else {</b>
+<b class="nc"><i>168</i>&nbsp;						items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.NEW_CONTACT, exposureTimestamp));</b>
+<i>169</i>&nbsp;					}
+<i>170</i>&nbsp;				}
+<b class="nc"><i>171</i>&nbsp;			} else {</b>
+<b class="nc"><i>172</i>&nbsp;				healthyView.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>173</i>&nbsp;				items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.NO_REPORTS, null));</b>
+<i>174</i>&nbsp;			}
+<i>175</i>&nbsp;
+<i>176</i>&nbsp;			/* Debug items
+<i>177</i>&nbsp;			items.clear();
+<i>178</i>&nbsp;			items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.NO_REPORTS, null));
+<i>179</i>&nbsp;			items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.POSSIBLE_INFECTION, 1585835019000L));
+<i>180</i>&nbsp;			items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.NEW_CONTACT, 1585835019000L));
+<i>181</i>&nbsp;			items.add(new Pair&lt;&gt;(ReportsPagerFragment.Type.POSITIVE_TESTED, 1585835019000L));
+<i>182</i>&nbsp;			 */
+<i>183</i>&nbsp;
+<b class="nc"><i>184</i>&nbsp;			pagerAdapter.updateItems(items);</b>
+<i>185</i>&nbsp;		});
+<i>186</i>&nbsp;
+<b class="nc"><i>187</i>&nbsp;		NotificationManager notificationManager =</b>
+<b class="nc"><i>188</i>&nbsp;				(NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);</b>
+<b class="nc"><i>189</i>&nbsp;		notificationManager.cancel(NotificationUtil.NOTIFICATION_ID_CONTACT);</b>
+<i>190</i>&nbsp;	}
+<i>191</i>&nbsp;
+<i>192</i>&nbsp;	private void openLink(@StringRes int stringRes) {
+<b class="nc"><i>193</i>&nbsp;		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(stringRes)));</b>
+<b class="nc"><i>194</i>&nbsp;		startActivity(browserIntent);</b>
+<i>195</i>&nbsp;	}
+<i>196</i>&nbsp;
+<i>197</i>&nbsp;	private void callHotline() {
+<b class="nc"><i>198</i>&nbsp;		hotlineJustCalled = true;</b>
+<b class="nc"><i>199</i>&nbsp;		secureStorage.justCalledHotline();</b>
+<b class="nc"><i>200</i>&nbsp;		PhoneUtil.callHelpline(getContext());</b>
+<i>201</i>&nbsp;	}
+<i>202</i>&nbsp;
+<i>203</i>&nbsp;	@Override
+<i>204</i>&nbsp;	public void onResume() {
+<b class="nc"><i>205</i>&nbsp;		super.onResume();</b>
+<i>206</i>&nbsp;
+<b class="nc"><i>207</i>&nbsp;		if (hotlineJustCalled) {</b>
+<b class="nc"><i>208</i>&nbsp;			hotlineJustCalled = false;</b>
+<b class="nc"><i>209</i>&nbsp;			hotlineView.setVisibility(View.GONE);</b>
+<b class="nc"><i>210</i>&nbsp;			saveOthersView.setVisibility(View.VISIBLE);</b>
+<i>211</i>&nbsp;		}
+<i>212</i>&nbsp;
+<b class="nc"><i>213</i>&nbsp;		long lastHotlineCallTimestamp = secureStorage.lastHotlineCallTimestamp();</b>
+<b class="nc"><i>214</i>&nbsp;		if (lastHotlineCallTimestamp != 0) {</b>
+<b class="nc"><i>215</i>&nbsp;			((TextView) hotlineView.findViewById(R.id.card_encounters_title)).setText(R.string.meldungen_detail_call_again);</b>
+<i>216</i>&nbsp;
+<b class="nc"><i>217</i>&nbsp;			String date = DateUtils.getFormattedDateTime(lastHotlineCallTimestamp);</b>
+<b class="nc"><i>218</i>&nbsp;			date = getString(R.string.meldungen_detail_call_last_call).replace(&quot;{DATE}&quot;, date);</b>
+<b class="nc"><i>219</i>&nbsp;			callHotlineLastText1.setText(date);</b>
+<b class="nc"><i>220</i>&nbsp;			callHotlineLastText2.setText(date);</b>
+<b class="nc"><i>221</i>&nbsp;		} else {</b>
+<b class="nc"><i>222</i>&nbsp;			callHotlineLastText1.setText(&quot;&quot;);</b>
+<b class="nc"><i>223</i>&nbsp;			callHotlineLastText2.setText(&quot;&quot;);</b>
+<i>224</i>&nbsp;		}
+<i>225</i>&nbsp;	}
+<i>226</i>&nbsp;
+<i>227</i>&nbsp;	public void doHeaderAnimation(View info, View image, Button button) {
+<b class="nc"><i>228</i>&nbsp;		secureStorage.setReportsHeaderAnimationPending(false);</b>
+<i>229</i>&nbsp;
+<b class="nc"><i>230</i>&nbsp;		ViewGroup rootView = (ViewGroup) getView();</b>
+<i>231</i>&nbsp;
+<b class="nc"><i>232</i>&nbsp;		scrollViewFirstchild.setPadding(scrollViewFirstchild.getPaddingLeft(),</b>
+<b class="nc"><i>233</i>&nbsp;				rootView.getHeight(),</b>
+<b class="nc"><i>234</i>&nbsp;				scrollViewFirstchild.getPaddingRight(), scrollViewFirstchild.getPaddingBottom());</b>
+<b class="nc"><i>235</i>&nbsp;		scrollViewFirstchild.setVisibility(View.VISIBLE);</b>
+<i>236</i>&nbsp;
+<b class="nc"><i>237</i>&nbsp;		rootView.post(() -&gt; {</b>
+<i>238</i>&nbsp;
+<b class="nc"><i>239</i>&nbsp;			AutoTransition autoTransition = new AutoTransition();</b>
+<b class="nc"><i>240</i>&nbsp;			autoTransition.setDuration(300);</b>
+<b class="nc"><i>241</i>&nbsp;			autoTransition.addListener(new Transition.TransitionListener() {</b>
+<i>242</i>&nbsp;				@Override
+<i>243</i>&nbsp;				public void onTransitionStart(@NonNull Transition transition) {
+<i>244</i>&nbsp;
+<i>245</i>&nbsp;				}
+<i>246</i>&nbsp;
+<i>247</i>&nbsp;				@Override
+<i>248</i>&nbsp;				public void onTransitionEnd(@NonNull Transition transition) {
+<b class="nc"><i>249</i>&nbsp;					headerViewPager.post(() -&gt; {</b>
+<b class="nc"><i>250</i>&nbsp;						setupScrollBehavior();</b>
+<i>251</i>&nbsp;					});
+<i>252</i>&nbsp;				}
+<i>253</i>&nbsp;
+<i>254</i>&nbsp;				@Override
+<i>255</i>&nbsp;				public void onTransitionCancel(@NonNull Transition transition) {
+<i>256</i>&nbsp;
+<i>257</i>&nbsp;				}
+<i>258</i>&nbsp;
+<i>259</i>&nbsp;				@Override
+<i>260</i>&nbsp;				public void onTransitionPause(@NonNull Transition transition) {
+<i>261</i>&nbsp;
+<i>262</i>&nbsp;				}
+<i>263</i>&nbsp;
+<i>264</i>&nbsp;				@Override
+<i>265</i>&nbsp;				public void onTransitionResume(@NonNull Transition transition) {
+<i>266</i>&nbsp;
+<i>267</i>&nbsp;				}
+<i>268</i>&nbsp;			});
+<i>269</i>&nbsp;
+<b class="nc"><i>270</i>&nbsp;			TransitionManager.beginDelayedTransition(rootView, autoTransition);</b>
+<i>271</i>&nbsp;
+<b class="nc"><i>272</i>&nbsp;			updateHeaderSize(false);</b>
+<i>273</i>&nbsp;
+<b class="nc"><i>274</i>&nbsp;			scrollViewFirstchild.setPadding(scrollViewFirstchild.getPaddingLeft(),</b>
+<i>275</i>&nbsp;					originalFirstChildPadding,
+<b class="nc"><i>276</i>&nbsp;					scrollViewFirstchild.getPaddingRight(), scrollViewFirstchild.getPaddingBottom());</b>
+<i>277</i>&nbsp;
+<b class="nc"><i>278</i>&nbsp;			info.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>279</i>&nbsp;			image.setVisibility(View.GONE);</b>
+<b class="nc"><i>280</i>&nbsp;			button.setVisibility(View.GONE);</b>
+<i>281</i>&nbsp;
+<b class="nc"><i>282</i>&nbsp;			circlePageIndicator.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>283</i>&nbsp;			headerViewPager.setUserInputEnabled(true);</b>
+<i>284</i>&nbsp;		});
+<i>285</i>&nbsp;	}
+<i>286</i>&nbsp;
+<i>287</i>&nbsp;	private void updateHeaderSize(boolean isReportsHeaderAnimationPending) {
+<b class="nc"><i>288</i>&nbsp;		ViewGroup.LayoutParams headerLp = headerViewPager.getLayoutParams();</b>
+<b class="nc"><i>289</i>&nbsp;		FrameLayout headerLayout = (FrameLayout) headerViewPager.getParent();</b>
+<b class="nc"><i>290</i>&nbsp;		ViewGroup.LayoutParams headerLayoutLp = headerLayout.getLayoutParams();</b>
+<b class="nc"><i>291</i>&nbsp;		if (isReportsHeaderAnimationPending) {</b>
+<b class="nc"><i>292</i>&nbsp;			headerLp.height = ViewGroup.LayoutParams.MATCH_PARENT;</b>
+<b class="nc"><i>293</i>&nbsp;			headerLayoutLp.height = ViewGroup.LayoutParams.MATCH_PARENT;</b>
+<i>294</i>&nbsp;		} else {
+<b class="nc"><i>295</i>&nbsp;			headerLp.height = getResources().getDimensionPixelSize(R.dimen.header_height_reports);</b>
+<b class="nc"><i>296</i>&nbsp;			headerLayoutLp.height = ViewGroup.LayoutParams.WRAP_CONTENT;</b>
+<i>297</i>&nbsp;		}
+<b class="nc"><i>298</i>&nbsp;		headerViewPager.setLayoutParams(headerLp);</b>
+<b class="nc"><i>299</i>&nbsp;		headerLayout.setLayoutParams(headerLayoutLp);</b>
+<i>300</i>&nbsp;	}
+<i>301</i>&nbsp;
+<i>302</i>&nbsp;	private void setupScrollBehavior() {
+<b class="nc"><i>303</i>&nbsp;		if (!isVisible()) return;</b>
+<i>304</i>&nbsp;
+<b class="nc"><i>305</i>&nbsp;		Rect rect = new Rect();</b>
+<b class="nc"><i>306</i>&nbsp;		headerViewPager.getDrawingRect(rect);</b>
+<b class="nc"><i>307</i>&nbsp;		scrollView.setScrollPreventRect(rect);</b>
+<i>308</i>&nbsp;
+<b class="nc"><i>309</i>&nbsp;		View headerParent = (View) headerViewPager.getParent();</b>
+<i>310</i>&nbsp;
+<b class="nc"><i>311</i>&nbsp;		int scrollRangePx = scrollViewFirstchild.getPaddingTop();</b>
+<b class="nc"><i>312</i>&nbsp;		int translationRangePx = -getResources().getDimensionPixelSize(R.dimen.spacing_huge);</b>
+<b class="nc"><i>313</i>&nbsp;		scrollView.setOnScrollChangeListener((v, scrollX, scrollY, oldScrollX, oldScrollY) -&gt; {</b>
+<b class="nc"><i>314</i>&nbsp;			float progress = computeScrollAnimProgress(scrollY, scrollRangePx);</b>
+<b class="nc"><i>315</i>&nbsp;			headerParent.setAlpha(1 - progress);</b>
+<b class="nc"><i>316</i>&nbsp;			headerParent.setTranslationY(progress * translationRangePx);</b>
+<i>317</i>&nbsp;		});
+<b class="nc"><i>318</i>&nbsp;		scrollView.post(() -&gt; {</b>
+<b class="nc"><i>319</i>&nbsp;			float progress = computeScrollAnimProgress(scrollView.getScrollY(), scrollRangePx);</b>
+<b class="nc"><i>320</i>&nbsp;			headerParent.setAlpha(1 - progress);</b>
+<b class="nc"><i>321</i>&nbsp;			headerParent.setTranslationY(progress * translationRangePx);</b>
+<i>322</i>&nbsp;		});
+<i>323</i>&nbsp;	}
+<i>324</i>&nbsp;
+<i>325</i>&nbsp;	private float computeScrollAnimProgress(int scrollY, int scrollRange) {
+<b class="nc"><i>326</i>&nbsp;		return Math.min(scrollY, scrollRange) / (float) scrollRange;</b>
+<i>327</i>&nbsp;	}
+<i>328</i>&nbsp;
+<i>329</i>&nbsp;	private class ReportsSlidePageAdapter extends FragmentStateAdapter {
+<i>330</i>&nbsp;
+<b class="nc"><i>331</i>&nbsp;		List&lt;Pair&lt;ReportsPagerFragment.Type, Long&gt;&gt; items = new ArrayList&lt;&gt;();</b>
+<i>332</i>&nbsp;
+<b class="nc"><i>333</i>&nbsp;		boolean isReportsHeaderAnimationPending = false;</b>
+<i>334</i>&nbsp;
+<b class="nc"><i>335</i>&nbsp;		ReportsSlidePageAdapter() {</b>
+<b class="nc"><i>336</i>&nbsp;			super(ReportsFragment.this);</b>
+<i>337</i>&nbsp;		}
+<i>338</i>&nbsp;
+<i>339</i>&nbsp;		void updateItems(List&lt;Pair&lt;ReportsPagerFragment.Type, Long&gt;&gt; items) {
+<i>340</i>&nbsp;
+<b class="nc"><i>341</i>&nbsp;			isReportsHeaderAnimationPending = secureStorage.isReportsHeaderAnimationPending();</b>
+<i>342</i>&nbsp;
+<b class="nc"><i>343</i>&nbsp;			this.items.clear();</b>
+<b class="nc"><i>344</i>&nbsp;			this.items.addAll(items);</b>
+<b class="nc"><i>345</i>&nbsp;			notifyDataSetChanged();</b>
+<i>346</i>&nbsp;
+<b class="nc"><i>347</i>&nbsp;			if (items.size() &gt; 1) {</b>
+<b class="nc"><i>348</i>&nbsp;				if (!isReportsHeaderAnimationPending) circlePageIndicator.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>349</i>&nbsp;				ViewGroup.LayoutParams lp = headerViewPager.getLayoutParams();</b>
+<b class="nc"><i>350</i>&nbsp;				lp.height = getResources().getDimensionPixelSize(R.dimen.header_height_reports_with_indicator);</b>
+<b class="nc"><i>351</i>&nbsp;				headerViewPager.setLayoutParams(lp);</b>
+<b class="nc"><i>352</i>&nbsp;				scrollViewFirstchild.setPadding(scrollViewFirstchild.getPaddingLeft(),</b>
+<b class="nc"><i>353</i>&nbsp;						getResources().getDimensionPixelSize(R.dimen.top_item_padding_reports_width_indicator),</b>
+<b class="nc"><i>354</i>&nbsp;						scrollViewFirstchild.getPaddingRight(), scrollViewFirstchild.getPaddingBottom());</b>
+<b class="nc"><i>355</i>&nbsp;			} else {</b>
+<b class="nc"><i>356</i>&nbsp;				circlePageIndicator.setVisibility(View.GONE);</b>
+<b class="nc"><i>357</i>&nbsp;				ViewGroup.LayoutParams lp = headerViewPager.getLayoutParams();</b>
+<b class="nc"><i>358</i>&nbsp;				lp.height = getResources().getDimensionPixelSize(R.dimen.header_height_reports);</b>
+<b class="nc"><i>359</i>&nbsp;				headerViewPager.setLayoutParams(lp);</b>
+<b class="nc"><i>360</i>&nbsp;				scrollViewFirstchild.setPadding(scrollViewFirstchild.getPaddingLeft(),</b>
+<b class="nc"><i>361</i>&nbsp;						getResources().getDimensionPixelSize(R.dimen.top_item_padding_reports),</b>
+<b class="nc"><i>362</i>&nbsp;						scrollViewFirstchild.getPaddingRight(), scrollViewFirstchild.getPaddingBottom());</b>
+<i>363</i>&nbsp;			}
+<i>364</i>&nbsp;
+<b class="nc"><i>365</i>&nbsp;			updateHeaderSize(isReportsHeaderAnimationPending);</b>
+<i>366</i>&nbsp;			
+<b class="nc"><i>367</i>&nbsp;			if (isReportsHeaderAnimationPending) {</b>
+<b class="nc"><i>368</i>&nbsp;				headerViewPager.setUserInputEnabled(false);</b>
+<i>369</i>&nbsp;
+<b class="nc"><i>370</i>&nbsp;				originalFirstChildPadding = scrollViewFirstchild.getPaddingTop();</b>
+<i>371</i>&nbsp;
+<b class="nc"><i>372</i>&nbsp;				scrollViewFirstchild.setVisibility(View.GONE);</b>
+<i>373</i>&nbsp;			}
+<i>374</i>&nbsp;
+<b class="nc"><i>375</i>&nbsp;			headerViewPager.post(() -&gt; {</b>
+<b class="nc"><i>376</i>&nbsp;				headerViewPager.setCurrentItem(items.size() - 1, false);</b>
+<i>377</i>&nbsp;
+<b class="nc"><i>378</i>&nbsp;				setupScrollBehavior();</b>
+<i>379</i>&nbsp;			});
+<i>380</i>&nbsp;		}
+<i>381</i>&nbsp;
+<i>382</i>&nbsp;		@NonNull
+<i>383</i>&nbsp;		@Override
+<i>384</i>&nbsp;		public Fragment createFragment(int position) {
+<i>385</i>&nbsp;
+<b class="nc"><i>386</i>&nbsp;			Pair&lt;ReportsPagerFragment.Type, Long&gt; item = items.get(position);</b>
+<b class="nc"><i>387</i>&nbsp;			ReportsPagerFragment.Type type = item.first;</b>
+<b class="nc"><i>388</i>&nbsp;			long timestamp = item.second == null ? 0 : item.second;</b>
+<i>389</i>&nbsp;
+<b class="nc"><i>390</i>&nbsp;			boolean showAnimationControls = isReportsHeaderAnimationPending &amp;&amp; position == items.size() - 1;</b>
+<i>391</i>&nbsp;
+<b class="nc"><i>392</i>&nbsp;			switch (type) {</b>
+<i>393</i>&nbsp;				case NO_REPORTS:
+<b class="nc"><i>394</i>&nbsp;					return ReportsPagerFragment.newInstance(ReportsPagerFragment.Type.NO_REPORTS, 0, false);</b>
+<i>395</i>&nbsp;				case POSSIBLE_INFECTION:
+<b class="nc"><i>396</i>&nbsp;					return ReportsPagerFragment</b>
+<b class="nc"><i>397</i>&nbsp;							.newInstance(ReportsPagerFragment.Type.POSSIBLE_INFECTION, timestamp, showAnimationControls);</b>
+<i>398</i>&nbsp;				case NEW_CONTACT:
+<b class="nc"><i>399</i>&nbsp;					return ReportsPagerFragment</b>
+<b class="nc"><i>400</i>&nbsp;							.newInstance(ReportsPagerFragment.Type.NEW_CONTACT, timestamp, showAnimationControls);</b>
+<i>401</i>&nbsp;				case POSITIVE_TESTED:
+<b class="nc"><i>402</i>&nbsp;					return ReportsPagerFragment.newInstance(ReportsPagerFragment.Type.POSITIVE_TESTED, timestamp, false);</b>
+<i>403</i>&nbsp;			}
+<i>404</i>&nbsp;
+<b class="nc"><i>405</i>&nbsp;			throw new IllegalArgumentException();</b>
+<i>406</i>&nbsp;		}
+<i>407</i>&nbsp;
+<i>408</i>&nbsp;		@Override
+<i>409</i>&nbsp;		public int getItemCount() {
+<b class="nc"><i>410</i>&nbsp;			return items.size();</b>
+<i>411</i>&nbsp;		}
+<i>412</i>&nbsp;
+<i>413</i>&nbsp;	}
+<i>414</i>&nbsp;
+<i>415</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-02 15:52</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,335 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: TracingErrorStateHelper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.dpppt.android.app.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: TracingErrorStateHelper (org.dpppt.android.app.util)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">TracingErrorStateHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 12)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 72)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">TracingErrorStateHelper$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 73)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (c) 2020 Ubique Innovation AG &lt;https://www.ubique.ch&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This Source Code Form is subject to the terms of the Mozilla Public
+<i>5</i>&nbsp; * License, v. 2.0. If a copy of the MPL was not distributed with this
+<i>6</i>&nbsp; * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * SPDX-License-Identifier: MPL-2.0
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;package org.dpppt.android.app.util;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import android.graphics.Paint;
+<i>14</i>&nbsp;import android.text.TextUtils;
+<i>15</i>&nbsp;import android.view.View;
+<i>16</i>&nbsp;import android.widget.ImageView;
+<i>17</i>&nbsp;import android.widget.TextView;
+<i>18</i>&nbsp;import androidx.annotation.DrawableRes;
+<i>19</i>&nbsp;import androidx.annotation.StringRes;
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;import java.util.Arrays;
+<i>22</i>&nbsp;import java.util.Collection;
+<i>23</i>&nbsp;import java.util.List;
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;import org.dpppt.android.sdk.TracingStatus;
+<i>26</i>&nbsp;
+<i>27</i>&nbsp;import org.dpppt.android.app.R;
+<i>28</i>&nbsp;
+<b class="nc"><i>29</i>&nbsp;public class TracingErrorStateHelper {</b>
+<i>30</i>&nbsp;
+<b class="nc"><i>31</i>&nbsp;	private static final List&lt;TracingStatus.ErrorState&gt; possibleErrorStatesOrderedByPriority = Arrays.asList(</b>
+<i>32</i>&nbsp;			TracingStatus.ErrorState.BLE_NOT_SUPPORTED,
+<i>33</i>&nbsp;			TracingStatus.ErrorState.MISSING_LOCATION_PERMISSION,
+<i>34</i>&nbsp;			TracingStatus.ErrorState.BLE_DISABLED,
+<i>35</i>&nbsp;			TracingStatus.ErrorState.LOCATION_SERVICE_DISABLED,
+<i>36</i>&nbsp;			TracingStatus.ErrorState.BATTERY_OPTIMIZER_ENABLED,
+<i>37</i>&nbsp;			TracingStatus.ErrorState.SYNC_ERROR_TIMING,
+<i>38</i>&nbsp;			TracingStatus.ErrorState.BLE_INTERNAL_ERROR,
+<i>39</i>&nbsp;			TracingStatus.ErrorState.BLE_ADVERTISING_ERROR,
+<i>40</i>&nbsp;			TracingStatus.ErrorState.BLE_SCANNER_ERROR);
+<i>41</i>&nbsp;
+<b class="nc"><i>42</i>&nbsp;	private static final List&lt;TracingStatus.ErrorState&gt; possibleNotificationErrorStatesOrderedByPriority = Arrays.asList(</b>
+<i>43</i>&nbsp;			TracingStatus.ErrorState.SYNC_ERROR_DATABASE,
+<i>44</i>&nbsp;			TracingStatus.ErrorState.SYNC_ERROR_SERVER,
+<i>45</i>&nbsp;			TracingStatus.ErrorState.SYNC_ERROR_NETWORK,
+<i>46</i>&nbsp;			TracingStatus.ErrorState.SYNC_ERROR_SIGNATURE
+<i>47</i>&nbsp;	);
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;	@StringRes
+<i>50</i>&nbsp;	private static int getTitle(TracingStatus.ErrorState tracingErrorState) {
+<b class="nc"><i>51</i>&nbsp;		switch (tracingErrorState) {</b>
+<i>52</i>&nbsp;			case LOCATION_SERVICE_DISABLED:
+<b class="nc"><i>53</i>&nbsp;				return R.string.error_location_services_title;</b>
+<i>54</i>&nbsp;			case BLE_DISABLED:
+<b class="nc"><i>55</i>&nbsp;				return R.string.bluetooth_turned_off_title;</b>
+<i>56</i>&nbsp;			case MISSING_LOCATION_PERMISSION:
+<b class="nc"><i>57</i>&nbsp;				return R.string.error_location_permission_title;</b>
+<i>58</i>&nbsp;			case BATTERY_OPTIMIZER_ENABLED:
+<b class="nc"><i>59</i>&nbsp;				return R.string.error_battery_optimization_title;</b>
+<i>60</i>&nbsp;			case SYNC_ERROR_TIMING:
+<b class="nc"><i>61</i>&nbsp;				return R.string.time_inconsistency_title;</b>
+<i>62</i>&nbsp;			case SYNC_ERROR_SERVER:
+<i>63</i>&nbsp;			case SYNC_ERROR_NETWORK:
+<i>64</i>&nbsp;			case SYNC_ERROR_SIGNATURE:
+<i>65</i>&nbsp;			case SYNC_ERROR_DATABASE:
+<b class="nc"><i>66</i>&nbsp;				return R.string.sync_error_title;</b>
+<i>67</i>&nbsp;			case BLE_NOT_SUPPORTED:
+<i>68</i>&nbsp;			case BLE_INTERNAL_ERROR:
+<i>69</i>&nbsp;			case BLE_ADVERTISING_ERROR:
+<i>70</i>&nbsp;			case BLE_SCANNER_ERROR:
+<i>71</i>&nbsp;			default:
+<b class="nc"><i>72</i>&nbsp;				return R.string.begegnungen_restart_error_title;</b>
+<i>73</i>&nbsp;		}
+<i>74</i>&nbsp;	}
+<i>75</i>&nbsp;
+<i>76</i>&nbsp;	@StringRes
+<i>77</i>&nbsp;	private static int getText(TracingStatus.ErrorState tracingErrorState) {
+<b class="nc"><i>78</i>&nbsp;		return tracingErrorState.getErrorString();</b>
+<i>79</i>&nbsp;	}
+<i>80</i>&nbsp;
+<i>81</i>&nbsp;	@DrawableRes
+<i>82</i>&nbsp;	private static int getIcon(TracingStatus.ErrorState tracingErrorState) {
+<b class="nc"><i>83</i>&nbsp;		switch (tracingErrorState) {</b>
+<i>84</i>&nbsp;			case LOCATION_SERVICE_DISABLED:
+<b class="nc"><i>85</i>&nbsp;				return R.drawable.ic_gps_off;</b>
+<i>86</i>&nbsp;			case BLE_DISABLED:
+<b class="nc"><i>87</i>&nbsp;				return R.drawable.ic_bluetooth_off;</b>
+<i>88</i>&nbsp;			case MISSING_LOCATION_PERMISSION:
+<b class="nc"><i>89</i>&nbsp;				return R.drawable.ic_location_off_red;</b>
+<i>90</i>&nbsp;			case BATTERY_OPTIMIZER_ENABLED:
+<b class="nc"><i>91</i>&nbsp;				return R.drawable.ic_battery;</b>
+<i>92</i>&nbsp;			case SYNC_ERROR_TIMING:
+<b class="nc"><i>93</i>&nbsp;				return R.drawable.ic_time;</b>
+<i>94</i>&nbsp;			case SYNC_ERROR_SERVER:
+<i>95</i>&nbsp;			case SYNC_ERROR_NETWORK:
+<i>96</i>&nbsp;			case SYNC_ERROR_DATABASE:
+<i>97</i>&nbsp;			case SYNC_ERROR_SIGNATURE:
+<i>98</i>&nbsp;			case BLE_NOT_SUPPORTED:
+<i>99</i>&nbsp;			case BLE_INTERNAL_ERROR:
+<i>100</i>&nbsp;			case BLE_ADVERTISING_ERROR:
+<i>101</i>&nbsp;			case BLE_SCANNER_ERROR:
+<i>102</i>&nbsp;			default:
+<b class="nc"><i>103</i>&nbsp;				return R.drawable.ic_warning_red;</b>
+<i>104</i>&nbsp;		}
+<i>105</i>&nbsp;	}
+<i>106</i>&nbsp;
+<i>107</i>&nbsp;	@StringRes
+<i>108</i>&nbsp;	private static int getButtonText(TracingStatus.ErrorState errorState) {
+<b class="nc"><i>109</i>&nbsp;		switch (errorState) {</b>
+<i>110</i>&nbsp;			case LOCATION_SERVICE_DISABLED:
+<b class="nc"><i>111</i>&nbsp;				return R.string.error_location_services_button;</b>
+<i>112</i>&nbsp;			case BLE_DISABLED:
+<b class="nc"><i>113</i>&nbsp;				return R.string.bluetooth_turn_on_button_title;</b>
+<i>114</i>&nbsp;			case MISSING_LOCATION_PERMISSION:
+<i>115</i>&nbsp;			case BATTERY_OPTIMIZER_ENABLED:
+<b class="nc"><i>116</i>&nbsp;				return R.string.error_location_permission_button;</b>
+<i>117</i>&nbsp;			case SYNC_ERROR_SERVER:
+<i>118</i>&nbsp;			case SYNC_ERROR_NETWORK:
+<i>119</i>&nbsp;			case SYNC_ERROR_DATABASE:
+<i>120</i>&nbsp;			case SYNC_ERROR_SIGNATURE:
+<b class="nc"><i>121</i>&nbsp;				return R.string.homescreen_meldung_data_outdated_retry_button;</b>
+<i>122</i>&nbsp;			case SYNC_ERROR_TIMING:
+<i>123</i>&nbsp;			case BLE_NOT_SUPPORTED:
+<i>124</i>&nbsp;			case BLE_INTERNAL_ERROR:
+<i>125</i>&nbsp;			case BLE_ADVERTISING_ERROR:
+<i>126</i>&nbsp;			case BLE_SCANNER_ERROR:
+<i>127</i>&nbsp;			default:
+<b class="nc"><i>128</i>&nbsp;				return -1;</b>
+<i>129</i>&nbsp;		}
+<i>130</i>&nbsp;	}
+<i>131</i>&nbsp;
+<i>132</i>&nbsp;	public static TracingStatus.ErrorState getErrorState(Collection&lt;TracingStatus.ErrorState&gt; errors) {
+<b class="nc"><i>133</i>&nbsp;		for (TracingStatus.ErrorState errorState : possibleErrorStatesOrderedByPriority) {</b>
+<b class="nc"><i>134</i>&nbsp;			if (errors.contains(errorState)) {</b>
+<b class="nc"><i>135</i>&nbsp;				return errorState;</b>
+<i>136</i>&nbsp;			}
+<b class="nc"><i>137</i>&nbsp;		}</b>
+<b class="nc"><i>138</i>&nbsp;		return null;</b>
+<i>139</i>&nbsp;	}
+<i>140</i>&nbsp;
+<i>141</i>&nbsp;	public static TracingStatus.ErrorState getErrorStateForReports(Collection&lt;TracingStatus.ErrorState&gt; errors) {
+<b class="nc"><i>142</i>&nbsp;		for (TracingStatus.ErrorState errorState : possibleNotificationErrorStatesOrderedByPriority) {</b>
+<b class="nc"><i>143</i>&nbsp;			if (errors.contains(errorState)) {</b>
+<b class="nc"><i>144</i>&nbsp;				return errorState;</b>
+<i>145</i>&nbsp;			}
+<b class="nc"><i>146</i>&nbsp;		}</b>
+<b class="nc"><i>147</i>&nbsp;		return null;</b>
+<i>148</i>&nbsp;	}
+<i>149</i>&nbsp;
+<i>150</i>&nbsp;	public static boolean isTracingErrorState(TracingStatus.ErrorState error) {
+<b class="nc"><i>151</i>&nbsp;		return possibleErrorStatesOrderedByPriority.contains(error);</b>
+<i>152</i>&nbsp;	}
+<i>153</i>&nbsp;
+<i>154</i>&nbsp;	public static boolean isReportsErrorState(TracingStatus.ErrorState error) {
+<b class="nc"><i>155</i>&nbsp;		return possibleNotificationErrorStatesOrderedByPriority.contains(error);</b>
+<i>156</i>&nbsp;	}
+<i>157</i>&nbsp;
+<i>158</i>&nbsp;	public static void updateErrorView(View tracingErrorView, TracingStatus.ErrorState errorState) {
+<b class="nc"><i>159</i>&nbsp;		if (errorState == null) {</b>
+<b class="nc"><i>160</i>&nbsp;			tracingErrorView.setVisibility(View.GONE);</b>
+<i>161</i>&nbsp;			return;
+<i>162</i>&nbsp;		}
+<b class="nc"><i>163</i>&nbsp;		tracingErrorView.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>164</i>&nbsp;		ImageView iconView = tracingErrorView.findViewById(R.id.error_status_image);</b>
+<b class="nc"><i>165</i>&nbsp;		TextView titleView = tracingErrorView.findViewById(R.id.error_status_title);</b>
+<b class="nc"><i>166</i>&nbsp;		TextView textView = tracingErrorView.findViewById(R.id.error_status_text);</b>
+<b class="nc"><i>167</i>&nbsp;		TextView errorCode = tracingErrorView.findViewById(R.id.error_status_code);</b>
+<b class="nc"><i>168</i>&nbsp;		TextView buttonView = tracingErrorView.findViewById(R.id.error_status_button);</b>
+<i>169</i>&nbsp;
+<b class="nc"><i>170</i>&nbsp;		iconView.setImageResource(TracingErrorStateHelper.getIcon(errorState));</b>
+<b class="nc"><i>171</i>&nbsp;		iconView.setVisibility(View.VISIBLE);</b>
+<i>172</i>&nbsp;
+<b class="nc"><i>173</i>&nbsp;		titleView.setText(TracingErrorStateHelper.getTitle(errorState));</b>
+<b class="nc"><i>174</i>&nbsp;		titleView.setVisibility(View.VISIBLE);</b>
+<i>175</i>&nbsp;
+<b class="nc"><i>176</i>&nbsp;		if (TracingErrorStateHelper.getText(errorState) != -1) {</b>
+<b class="nc"><i>177</i>&nbsp;			textView.setText(TracingErrorStateHelper.getText(errorState));</b>
+<b class="nc"><i>178</i>&nbsp;			textView.setVisibility(View.VISIBLE);</b>
+<i>179</i>&nbsp;		} else {
+<b class="nc"><i>180</i>&nbsp;			textView.setVisibility(View.GONE);</b>
+<i>181</i>&nbsp;		}
+<b class="nc"><i>182</i>&nbsp;		if (!TextUtils.isEmpty(TracingErrorStateHelper.getErrorCode(errorState))) {</b>
+<b class="nc"><i>183</i>&nbsp;			errorCode.setText(TracingErrorStateHelper.getErrorCode(errorState));</b>
+<b class="nc"><i>184</i>&nbsp;			errorCode.setVisibility(View.VISIBLE);</b>
+<i>185</i>&nbsp;		} else {
+<b class="nc"><i>186</i>&nbsp;			errorCode.setVisibility(View.GONE);</b>
+<i>187</i>&nbsp;		}
+<i>188</i>&nbsp;
+<b class="nc"><i>189</i>&nbsp;		if (TracingErrorStateHelper.getButtonText(errorState) != -1) {</b>
+<b class="nc"><i>190</i>&nbsp;			buttonView.setText(TracingErrorStateHelper.getButtonText(errorState));</b>
+<b class="nc"><i>191</i>&nbsp;			buttonView.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>192</i>&nbsp;			buttonView.setPaintFlags(buttonView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);</b>
+<i>193</i>&nbsp;		} else {
+<b class="nc"><i>194</i>&nbsp;			buttonView.setVisibility(View.GONE);</b>
+<i>195</i>&nbsp;		}
+<i>196</i>&nbsp;	}
+<i>197</i>&nbsp;
+<i>198</i>&nbsp;	private static String getErrorCode(TracingStatus.ErrorState errorState) {
+<b class="nc"><i>199</i>&nbsp;		switch (errorState) {</b>
+<i>200</i>&nbsp;			case BLE_NOT_SUPPORTED:
+<b class="nc"><i>201</i>&nbsp;				return &quot;NSBNS&quot;;</b>
+<i>202</i>&nbsp;			case BLE_INTERNAL_ERROR:
+<b class="nc"><i>203</i>&nbsp;				return &quot;NSBIR&quot;;</b>
+<i>204</i>&nbsp;			case BLE_ADVERTISING_ERROR:
+<b class="nc"><i>205</i>&nbsp;				return &quot;NSBAE&quot;;</b>
+<i>206</i>&nbsp;			case BLE_SCANNER_ERROR:
+<b class="nc"><i>207</i>&nbsp;				return &quot;NSBSE&quot;;</b>
+<i>208</i>&nbsp;			case SYNC_ERROR_SERVER:
+<b class="nc"><i>209</i>&nbsp;				return &quot;RTSES&quot;;</b>
+<i>210</i>&nbsp;			case SYNC_ERROR_NETWORK:
+<b class="nc"><i>211</i>&nbsp;				return &quot;RTSEN&quot;;</b>
+<i>212</i>&nbsp;			case SYNC_ERROR_SIGNATURE:
+<b class="nc"><i>213</i>&nbsp;				return &quot;RTSESI&quot;;</b>
+<i>214</i>&nbsp;			case SYNC_ERROR_DATABASE:
+<b class="nc"><i>215</i>&nbsp;				return &quot;RTSEDB&quot;;</b>
+<i>216</i>&nbsp;			case SYNC_ERROR_TIMING:
+<i>217</i>&nbsp;			case MISSING_LOCATION_PERMISSION:
+<i>218</i>&nbsp;			case LOCATION_SERVICE_DISABLED:
+<i>219</i>&nbsp;			case BLE_DISABLED:
+<i>220</i>&nbsp;			case BATTERY_OPTIMIZER_ENABLED:
+<i>221</i>&nbsp;			default:
+<b class="nc"><i>222</i>&nbsp;				return &quot;&quot;;</b>
+<i>223</i>&nbsp;		}
+<i>224</i>&nbsp;	}
+<i>225</i>&nbsp;
+<i>226</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-02 15:52</div>
+</div>
+</body>
+</html>

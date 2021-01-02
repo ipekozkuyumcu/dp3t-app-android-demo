@@ -1,0 +1,274 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InformFragment</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.dpppt.android.app.inform</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InformFragment (org.dpppt.android.app.inform)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InformFragment</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 11)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 33)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">InformFragment$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+  </tr>
+  <tr>
+    <td class="name">InformFragment$2</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 3)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 13)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 17)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 49)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (c) 2020 Ubique Innovation AG &lt;https://www.ubique.ch&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This Source Code Form is subject to the terms of the Mozilla Public
+<i>5</i>&nbsp; * License, v. 2.0. If a copy of the MPL was not distributed with this
+<i>6</i>&nbsp; * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * SPDX-License-Identifier: MPL-2.0
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;package org.dpppt.android.app.inform;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import android.os.Bundle;
+<i>13</i>&nbsp;import android.view.View;
+<i>14</i>&nbsp;import android.widget.Button;
+<i>15</i>&nbsp;import androidx.annotation.NonNull;
+<i>16</i>&nbsp;import androidx.annotation.Nullable;
+<i>17</i>&nbsp;import androidx.appcompat.app.AlertDialog;
+<i>18</i>&nbsp;import androidx.fragment.app.Fragment;
+<i>19</i>&nbsp;
+<i>20</i>&nbsp;import java.util.Calendar;
+<i>21</i>&nbsp;import java.util.Date;
+<i>22</i>&nbsp;
+<i>23</i>&nbsp;import org.dpppt.android.app.R;
+<i>24</i>&nbsp;import org.dpppt.android.app.inform.views.ChainedEditText;
+<i>25</i>&nbsp;import org.dpppt.android.app.storage.SecureStorage;
+<i>26</i>&nbsp;import org.dpppt.android.app.util.InfoDialog;
+<i>27</i>&nbsp;import org.dpppt.android.sdk.DP3T;
+<i>28</i>&nbsp;import org.dpppt.android.sdk.backend.ResponseCallback;
+<i>29</i>&nbsp;import org.dpppt.android.sdk.backend.models.ExposeeAuthMethodJson;
+<i>30</i>&nbsp;
+<b class="nc"><i>31</i>&nbsp;public class InformFragment extends Fragment {</b>
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;	private static final long TIMEOUT_VALID_CODE = 1000 * 60 * 5;
+<i>34</i>&nbsp;
+<i>35</i>&nbsp;	private static final String REGEX_CODE_PATTERN = &quot;\\d{&quot; + ChainedEditText.NUM_CHARACTERS + &quot;}&quot;;
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	private ChainedEditText authCodeInput;
+<i>38</i>&nbsp;	private AlertDialog progressDialog;
+<i>39</i>&nbsp;	private Button buttonSend;
+<i>40</i>&nbsp;
+<i>41</i>&nbsp;	private SecureStorage secureStorage;
+<i>42</i>&nbsp;
+<i>43</i>&nbsp;	public static InformFragment newInstance() {
+<b class="nc"><i>44</i>&nbsp;		return new InformFragment();</b>
+<i>45</i>&nbsp;	}
+<i>46</i>&nbsp;
+<i>47</i>&nbsp;	public InformFragment() {
+<b class="nc"><i>48</i>&nbsp;		super(R.layout.fragment_inform);</b>
+<i>49</i>&nbsp;	}
+<i>50</i>&nbsp;
+<i>51</i>&nbsp;	@Override
+<i>52</i>&nbsp;	public void onCreate(@Nullable Bundle savedInstanceState) {
+<b class="nc"><i>53</i>&nbsp;		super.onCreate(savedInstanceState);</b>
+<i>54</i>&nbsp;
+<b class="nc"><i>55</i>&nbsp;		secureStorage = SecureStorage.getInstance(getContext());</b>
+<i>56</i>&nbsp;	}
+<i>57</i>&nbsp;
+<i>58</i>&nbsp;	@Override
+<i>59</i>&nbsp;	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+<b class="nc"><i>60</i>&nbsp;		super.onViewCreated(view, savedInstanceState);</b>
+<i>61</i>&nbsp;
+<b class="nc"><i>62</i>&nbsp;		((InformActivity) requireActivity()).allowBackButton(true);</b>
+<b class="nc"><i>63</i>&nbsp;		buttonSend = view.findViewById(R.id.trigger_fragment_button_trigger);</b>
+<b class="nc"><i>64</i>&nbsp;		authCodeInput = view.findViewById(R.id.trigger_fragment_input);</b>
+<b class="nc"><i>65</i>&nbsp;		authCodeInput.addTextChangedListener(new ChainedEditText.ChainedEditTextListener() {</b>
+<i>66</i>&nbsp;			@Override
+<i>67</i>&nbsp;			public void onTextChanged(String input) {
+<b class="nc"><i>68</i>&nbsp;				buttonSend.setEnabled(input.matches(REGEX_CODE_PATTERN));</b>
+<i>69</i>&nbsp;			}
+<i>70</i>&nbsp;
+<i>71</i>&nbsp;			@Override
+<i>72</i>&nbsp;			public void onEditorSendAction() {
+<b class="nc"><i>73</i>&nbsp;				if (buttonSend.isEnabled()) buttonSend.callOnClick();</b>
+<i>74</i>&nbsp;			}
+<i>75</i>&nbsp;		});
+<i>76</i>&nbsp;
+<b class="nc"><i>77</i>&nbsp;		long lastRequestTime = secureStorage.getLastInformRequestTime();</b>
+<b class="nc"><i>78</i>&nbsp;		String lastCode = secureStorage.getLastInformCode();</b>
+<b class="nc"><i>79</i>&nbsp;		String lastToken = secureStorage.getLastInformToken();</b>
+<i>80</i>&nbsp;
+<b class="nc"><i>81</i>&nbsp;		if (System.currentTimeMillis() - lastRequestTime &lt; TIMEOUT_VALID_CODE) {</b>
+<b class="nc"><i>82</i>&nbsp;			authCodeInput.setText(lastCode);</b>
+<b class="nc"><i>83</i>&nbsp;		} else if (lastCode != null || lastToken != null) {</b>
+<b class="nc"><i>84</i>&nbsp;			secureStorage.clearInformTimeAndCodeAndToken();</b>
+<i>85</i>&nbsp;		}
+<i>86</i>&nbsp;
+<b class="nc"><i>87</i>&nbsp;		buttonSend.setOnClickListener(v -&gt; {</b>
+<b class="nc"><i>88</i>&nbsp;			buttonSend.setEnabled(false);</b>
+<b class="nc"><i>89</i>&nbsp;			String authCode = authCodeInput.getText();</b>
+<i>90</i>&nbsp;
+<b class="nc"><i>91</i>&nbsp;			progressDialog = createProgressDialog();</b>
+<b class="nc"><i>92</i>&nbsp;			Calendar calendar = Calendar.getInstance();</b>
+<b class="nc"><i>93</i>&nbsp;			calendar.add(Calendar.DATE, -14);</b>
+<b class="nc"><i>94</i>&nbsp;			informExposed(calendar.getTime(), authCode);</b>
+<i>95</i>&nbsp;		});
+<i>96</i>&nbsp;
+<b class="nc"><i>97</i>&nbsp;		view.findViewById(R.id.cancel_button).setOnClickListener(v -&gt; {</b>
+<b class="nc"><i>98</i>&nbsp;			getActivity().finish();</b>
+<i>99</i>&nbsp;		});
+<i>100</i>&nbsp;	}
+<i>101</i>&nbsp;
+<i>102</i>&nbsp;	private void informExposed(Date onsetDate, String authCode) {
+<b class="nc"><i>103</i>&nbsp;		DP3T.sendIAmInfected(getContext(), onsetDate,</b>
+<b class="nc"><i>104</i>&nbsp;				new ExposeeAuthMethodJson(authCode), new ResponseCallback&lt;Void&gt;() {</b>
+<i>105</i>&nbsp;					@Override
+<i>106</i>&nbsp;					public void onSuccess(Void response) {
+<b class="nc"><i>107</i>&nbsp;						if (progressDialog != null &amp;&amp; progressDialog.isShowing()) {</b>
+<b class="nc"><i>108</i>&nbsp;							progressDialog.dismiss();</b>
+<i>109</i>&nbsp;						}
+<b class="nc"><i>110</i>&nbsp;						secureStorage.clearInformTimeAndCodeAndToken();</b>
+<b class="nc"><i>111</i>&nbsp;						getParentFragmentManager().beginTransaction()</b>
+<b class="nc"><i>112</i>&nbsp;								.setCustomAnimations(R.anim.slide_enter, R.anim.slide_exit, R.anim.slide_pop_enter,</b>
+<i>113</i>&nbsp;										R.anim.slide_pop_exit)
+<b class="nc"><i>114</i>&nbsp;								.replace(R.id.inform_fragment_container, ThankYouFragment.newInstance())</b>
+<b class="nc"><i>115</i>&nbsp;								.commit();</b>
+<i>116</i>&nbsp;					}
+<i>117</i>&nbsp;
+<i>118</i>&nbsp;					@Override
+<i>119</i>&nbsp;					public void onError(Throwable throwable) {
+<b class="nc"><i>120</i>&nbsp;						if (progressDialog != null &amp;&amp; progressDialog.isShowing()) {</b>
+<b class="nc"><i>121</i>&nbsp;							progressDialog.dismiss();</b>
+<i>122</i>&nbsp;						}
+<b class="nc"><i>123</i>&nbsp;						showErrorDialog(getString(R.string.network_error), null);</b>
+<b class="nc"><i>124</i>&nbsp;						throwable.printStackTrace();</b>
+<b class="nc"><i>125</i>&nbsp;						buttonSend.setEnabled(true);</b>
+<i>126</i>&nbsp;					}
+<i>127</i>&nbsp;				});
+<i>128</i>&nbsp;	}
+<i>129</i>&nbsp;
+<i>130</i>&nbsp;	@Override
+<i>131</i>&nbsp;	public void onResume() {
+<b class="nc"><i>132</i>&nbsp;		super.onResume();</b>
+<b class="nc"><i>133</i>&nbsp;		authCodeInput.requestFocus();</b>
+<i>134</i>&nbsp;	}
+<i>135</i>&nbsp;
+<i>136</i>&nbsp;	private AlertDialog createProgressDialog() {
+<b class="nc"><i>137</i>&nbsp;		return new AlertDialog.Builder(getContext())</b>
+<b class="nc"><i>138</i>&nbsp;				.setView(R.layout.dialog_loading)</b>
+<b class="nc"><i>139</i>&nbsp;				.show();</b>
+<i>140</i>&nbsp;	}
+<i>141</i>&nbsp;
+<i>142</i>&nbsp;	private void showErrorDialog(String error, @Nullable String errorCode) {
+<b class="nc"><i>143</i>&nbsp;		InfoDialog.newInstanceWithDetail(error, errorCode).show(getChildFragmentManager(), InfoDialog.class.getCanonicalName());</b>
+<i>144</i>&nbsp;	}
+<i>145</i>&nbsp;
+<i>146</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-02 15:52</div>
+</div>
+</body>
+</html>

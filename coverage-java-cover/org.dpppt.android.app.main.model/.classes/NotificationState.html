@@ -1,0 +1,216 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NotificationState</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.dpppt.android.app.main.model</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NotificationState (org.dpppt.android.app.main.model)</h1>
+
+<table class="coverageStats">
+
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificationState</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 8)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 37)
+  </span>
+</td>
+</tr>
+  <tr>
+    <td class="name">NotificationState$1</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+  </tr>
+<tr>
+  <td class="name"><strong>total</strong></td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 9)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 38)
+  </span>
+</td>
+</tr>
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (c) 2020 Ubique Innovation AG &lt;https://www.ubique.ch&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This Source Code Form is subject to the terms of the Mozilla Public
+<i>5</i>&nbsp; * License, v. 2.0. If a copy of the MPL was not distributed with this
+<i>6</i>&nbsp; * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * SPDX-License-Identifier: MPL-2.0
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;package org.dpppt.android.app.main.model;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import androidx.annotation.ColorRes;
+<i>14</i>&nbsp;import androidx.annotation.DrawableRes;
+<i>15</i>&nbsp;import androidx.annotation.StringRes;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;import org.dpppt.android.app.R;
+<i>18</i>&nbsp;
+<i>19</i>&nbsp;
+<b class="nc"><i>20</i>&nbsp;public enum NotificationState {</b>
+<b class="nc"><i>21</i>&nbsp;	NO_REPORTS,</b>
+<b class="nc"><i>22</i>&nbsp;	EXPOSED,</b>
+<b class="nc"><i>23</i>&nbsp;	POSITIVE_TESTED;</b>
+<i>24</i>&nbsp;
+<i>25</i>&nbsp;	@StringRes public static int getTitle(NotificationState notificationState) {
+<b class="nc"><i>26</i>&nbsp;		switch (notificationState) {</b>
+<i>27</i>&nbsp;			case NO_REPORTS:
+<b class="nc"><i>28</i>&nbsp;				return R.string.meldungen_no_meldungen_title;</b>
+<i>29</i>&nbsp;			case EXPOSED:
+<b class="nc"><i>30</i>&nbsp;				return R.string.meldungen_meldung_title;</b>
+<i>31</i>&nbsp;			case POSITIVE_TESTED:
+<b class="nc"><i>32</i>&nbsp;				return R.string.meldung_homescreen_positiv_title;</b>
+<i>33</i>&nbsp;		}
+<b class="nc"><i>34</i>&nbsp;		return -1;</b>
+<i>35</i>&nbsp;	}
+<i>36</i>&nbsp;
+<i>37</i>&nbsp;	@StringRes public static int getText(NotificationState NotificationState) {
+<b class="nc"><i>38</i>&nbsp;		switch (NotificationState) {</b>
+<i>39</i>&nbsp;			case NO_REPORTS:
+<b class="nc"><i>40</i>&nbsp;				return R.string.meldungen_no_meldungen_subtitle;</b>
+<i>41</i>&nbsp;			case EXPOSED:
+<b class="nc"><i>42</i>&nbsp;				return R.string.meldungen_meldung_text;</b>
+<i>43</i>&nbsp;			case POSITIVE_TESTED:
+<b class="nc"><i>44</i>&nbsp;				return R.string.meldung_homescreen_positiv_text;</b>
+<i>45</i>&nbsp;		}
+<b class="nc"><i>46</i>&nbsp;		return -1;</b>
+<i>47</i>&nbsp;	}
+<i>48</i>&nbsp;
+<i>49</i>&nbsp;	@DrawableRes public static int getIcon(NotificationState notificationState) {
+<b class="nc"><i>50</i>&nbsp;		switch (notificationState) {</b>
+<i>51</i>&nbsp;			case NO_REPORTS:
+<b class="nc"><i>52</i>&nbsp;				return R.drawable.ic_check;</b>
+<i>53</i>&nbsp;			case EXPOSED:
+<b class="nc"><i>54</i>&nbsp;				return R.drawable.ic_info;</b>
+<i>55</i>&nbsp;			case POSITIVE_TESTED:
+<b class="nc"><i>56</i>&nbsp;				return R.drawable.ic_info;</b>
+<i>57</i>&nbsp;		}
+<b class="nc"><i>58</i>&nbsp;		return -1;</b>
+<i>59</i>&nbsp;	}
+<i>60</i>&nbsp;
+<i>61</i>&nbsp;	@ColorRes public static int getTitleTextColor(NotificationState notificationState) {
+<b class="nc"><i>62</i>&nbsp;		switch (notificationState) {</b>
+<i>63</i>&nbsp;			case NO_REPORTS:
+<b class="nc"><i>64</i>&nbsp;				return R.color.green_main;</b>
+<i>65</i>&nbsp;			case EXPOSED:
+<b class="nc"><i>66</i>&nbsp;				return R.color.white;</b>
+<i>67</i>&nbsp;			case POSITIVE_TESTED:
+<b class="nc"><i>68</i>&nbsp;				return R.color.white;</b>
+<i>69</i>&nbsp;		}
+<b class="nc"><i>70</i>&nbsp;		return -1;</b>
+<i>71</i>&nbsp;	}
+<i>72</i>&nbsp;
+<i>73</i>&nbsp;	@ColorRes public static int geTextColor(NotificationState notificationState) {
+<b class="nc"><i>74</i>&nbsp;		switch (notificationState) {</b>
+<i>75</i>&nbsp;			case NO_REPORTS:
+<b class="nc"><i>76</i>&nbsp;				return R.color.dark_main;</b>
+<i>77</i>&nbsp;			case EXPOSED:
+<b class="nc"><i>78</i>&nbsp;				return R.color.white;</b>
+<i>79</i>&nbsp;			case POSITIVE_TESTED:
+<b class="nc"><i>80</i>&nbsp;				return R.color.white;</b>
+<i>81</i>&nbsp;		}
+<b class="nc"><i>82</i>&nbsp;		return -1;</b>
+<i>83</i>&nbsp;	}
+<i>84</i>&nbsp;
+<i>85</i>&nbsp;	@ColorRes public static int getBackgroundColor(NotificationState notificationState) {
+<b class="nc"><i>86</i>&nbsp;		switch (notificationState) {</b>
+<i>87</i>&nbsp;			case NO_REPORTS:
+<b class="nc"><i>88</i>&nbsp;				return R.color.status_green_bg;</b>
+<i>89</i>&nbsp;			case EXPOSED:
+<b class="nc"><i>90</i>&nbsp;				return R.color.blue_main;</b>
+<i>91</i>&nbsp;			case POSITIVE_TESTED:
+<b class="nc"><i>92</i>&nbsp;				return R.color.purple_main;</b>
+<i>93</i>&nbsp;		}
+<b class="nc"><i>94</i>&nbsp;		return -1;</b>
+<i>95</i>&nbsp;	}
+<i>96</i>&nbsp;
+<i>97</i>&nbsp;	public static int getIllu(NotificationState state) {
+<b class="nc"><i>98</i>&nbsp;		switch (state) {</b>
+<i>99</i>&nbsp;			case NO_REPORTS:
+<b class="nc"><i>100</i>&nbsp;				return R.drawable.ill_no_message;</b>
+<i>101</i>&nbsp;			case EXPOSED:
+<i>102</i>&nbsp;			case POSITIVE_TESTED:
+<i>103</i>&nbsp;			default:
+<b class="nc"><i>104</i>&nbsp;				return -1;</b>
+<i>105</i>&nbsp;		}
+<i>106</i>&nbsp;	}
+<i>107</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-02 15:52</div>
+</div>
+</body>
+</html>

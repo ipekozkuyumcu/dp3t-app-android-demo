@@ -1,0 +1,112 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: PhoneUtil</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.dpppt.android.app.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: PhoneUtil (org.dpppt.android.app.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">PhoneUtil</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 5)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (c) 2020 Ubique Innovation AG &lt;https://www.ubique.ch&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This Source Code Form is subject to the terms of the Mozilla Public
+<i>5</i>&nbsp; * License, v. 2.0. If a copy of the MPL was not distributed with this
+<i>6</i>&nbsp; * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * SPDX-License-Identifier: MPL-2.0
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;package org.dpppt.android.app.util;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import android.content.Context;
+<i>14</i>&nbsp;import android.content.Intent;
+<i>15</i>&nbsp;import android.net.Uri;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;import org.dpppt.android.app.R;
+<i>18</i>&nbsp;
+<b class="nc"><i>19</i>&nbsp;public class PhoneUtil {</b>
+<i>20</i>&nbsp;
+<i>21</i>&nbsp;	public static void callHelpline(Context context) {
+<b class="nc"><i>22</i>&nbsp;		Intent intent = new Intent(Intent.ACTION_DIAL);</b>
+<b class="nc"><i>23</i>&nbsp;		intent.setData(Uri.parse(&quot;tel:&quot; + context.getString(R.string.infoline_tel_number)));</b>
+<b class="nc"><i>24</i>&nbsp;		if (intent.resolveActivity(context.getPackageManager()) != null) {</b>
+<b class="nc"><i>25</i>&nbsp;			context.startActivity(intent);</b>
+<i>26</i>&nbsp;		}
+<i>27</i>&nbsp;	}
+<i>28</i>&nbsp;
+<i>29</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-02 15:52</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,140 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: NotificatonErrorStateHelper</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.dpppt.android.app.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: NotificatonErrorStateHelper (org.dpppt.android.app.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">NotificatonErrorStateHelper</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 2)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 23)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (c) 2020 Ubique Innovation AG &lt;https://www.ubique.ch&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This Source Code Form is subject to the terms of the Mozilla Public
+<i>5</i>&nbsp; * License, v. 2.0. If a copy of the MPL was not distributed with this
+<i>6</i>&nbsp; * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * SPDX-License-Identifier: MPL-2.0
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;package org.dpppt.android.app.util;
+<i>11</i>&nbsp;
+<i>12</i>&nbsp;import android.graphics.Paint;
+<i>13</i>&nbsp;import android.view.View;
+<i>14</i>&nbsp;import android.widget.ImageView;
+<i>15</i>&nbsp;import android.widget.TextView;
+<i>16</i>&nbsp;
+<i>17</i>&nbsp;import org.dpppt.android.app.R;
+<i>18</i>&nbsp;import org.dpppt.android.app.main.model.NotificationStateError;
+<i>19</i>&nbsp;
+<b class="nc"><i>20</i>&nbsp;public class NotificatonErrorStateHelper {</b>
+<i>21</i>&nbsp;
+<i>22</i>&nbsp;	public static void updateNotificationErrorView(View reportErrorView, NotificationStateError notificationStateError) {
+<b class="nc"><i>23</i>&nbsp;		if (notificationStateError == null) {</b>
+<b class="nc"><i>24</i>&nbsp;			reportErrorView.setVisibility(View.GONE);</b>
+<i>25</i>&nbsp;			return;
+<i>26</i>&nbsp;		}
+<b class="nc"><i>27</i>&nbsp;		reportErrorView.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>28</i>&nbsp;		ImageView iconView = reportErrorView.findViewById(R.id.error_status_image);</b>
+<b class="nc"><i>29</i>&nbsp;		TextView titleView = reportErrorView.findViewById(R.id.error_status_title);</b>
+<b class="nc"><i>30</i>&nbsp;		TextView textView = reportErrorView.findViewById(R.id.error_status_text);</b>
+<b class="nc"><i>31</i>&nbsp;		TextView errorCode = reportErrorView.findViewById(R.id.error_status_code);</b>
+<b class="nc"><i>32</i>&nbsp;		errorCode.setVisibility(View.GONE);</b>
+<b class="nc"><i>33</i>&nbsp;		TextView buttonView = reportErrorView.findViewById(R.id.error_status_button);</b>
+<i>34</i>&nbsp;
+<b class="nc"><i>35</i>&nbsp;		iconView.setImageResource(NotificationStateError.getIcon(notificationStateError));</b>
+<b class="nc"><i>36</i>&nbsp;		iconView.setVisibility(View.VISIBLE);</b>
+<i>37</i>&nbsp;
+<b class="nc"><i>38</i>&nbsp;		titleView.setText(NotificationStateError.getTitle(notificationStateError));</b>
+<b class="nc"><i>39</i>&nbsp;		titleView.setVisibility(View.VISIBLE);</b>
+<i>40</i>&nbsp;
+<b class="nc"><i>41</i>&nbsp;		if (NotificationStateError.getText(notificationStateError) != -1) {</b>
+<b class="nc"><i>42</i>&nbsp;			textView.setText(NotificationStateError.getText(notificationStateError));</b>
+<b class="nc"><i>43</i>&nbsp;			textView.setVisibility(View.VISIBLE);</b>
+<i>44</i>&nbsp;		} else {
+<b class="nc"><i>45</i>&nbsp;			textView.setVisibility(View.GONE);</b>
+<i>46</i>&nbsp;		}
+<i>47</i>&nbsp;
+<b class="nc"><i>48</i>&nbsp;		if (NotificationStateError.getButtonText(notificationStateError) != -1) {</b>
+<b class="nc"><i>49</i>&nbsp;			buttonView.setText(NotificationStateError.getButtonText(notificationStateError));</b>
+<b class="nc"><i>50</i>&nbsp;			buttonView.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>51</i>&nbsp;			buttonView.setPaintFlags(buttonView.getPaintFlags() | Paint.UNDERLINE_TEXT_FLAG);</b>
+<i>52</i>&nbsp;		} else {
+<b class="nc"><i>53</i>&nbsp;			buttonView.setVisibility(View.GONE);</b>
+<i>54</i>&nbsp;		}
+<i>55</i>&nbsp;	}
+<i>56</i>&nbsp;
+<i>57</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-02 15:52</div>
+</div>
+</body>
+</html>
