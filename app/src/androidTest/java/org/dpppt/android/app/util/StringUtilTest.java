@@ -30,7 +30,8 @@ public class StringUtilTest {
 
     @Test
     public void makePartiallyBold() {
-        SpannableString result = StringUtil.makePartiallyBold("Unit Test Text", 2, 4);
+        SpannableString result = StringUtil.makePartiallyBold("Unit Test Text",
+                2, 4);
         assertEquals(result.toString(), "Unit Test Text");
     }
 }

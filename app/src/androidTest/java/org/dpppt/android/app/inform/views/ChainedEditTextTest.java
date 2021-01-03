@@ -48,11 +48,13 @@ public class ChainedEditTextTest {
         server.start();
 
         AppConfigManager appConfigManager = AppConfigManager.getInstance(context);
-        DP3T.init(context, new ApplicationInfo("my-app-id", server.url("/bucket/").toString(), server.url("/report/").toString()),
+        DP3T.init(context, new ApplicationInfo("my-app-id", server.url("/bucket/").toString(),
+                        server.url("/report/").toString()),
                 null);
         // appConfigManager.setTracingEnabled(false);
         // DP3T.clearData(context, () -> {});
-        DP3T.init(context, new ApplicationInfo("my-app-id", server.url("/bucket/").toString(), server.url("/report/").toString()),
+        DP3T.init(context, new ApplicationInfo("my-app-id", server.url("/bucket/").toString(),
+                        server.url("/report/").toString()),
                 null);
         // appConfigManager.setTracingEnabled(true);
     }

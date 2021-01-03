@@ -1,0 +1,202 @@
+
+
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html id="htmlId">
+<head>
+  <title>Coverage Report :: InfoDialog</title>
+  <style type="text/css">
+    @import "../../.css/coverage.css";
+  </style>
+</head>
+
+<body>
+<div class="header"></div>
+
+<div class="content">
+<div class="breadCrumbs">
+    [ <a href="../../index.html">all classes</a> ]
+    [ <a href="../index.html">org.dpppt.android.app.util</a> ]
+</div>
+
+<h1>Coverage Summary for Class: InfoDialog (org.dpppt.android.app.util)</h1>
+
+<table class="coverageStats">
+<tr>
+  <th class="name">Class</th>
+<th class="coverageStat 
+">
+  Class, %
+</th>
+<th class="coverageStat 
+">
+  Method, %
+</th>
+<th class="coverageStat 
+">
+  Line, %
+</th>
+</tr>
+<tr>
+  <td class="name">InfoDialog</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 1)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 10)
+  </span>
+</td>
+<td class="coverageStat">
+  <span class="percent">
+    0%
+  </span>
+  <span class="absValue">
+    (0/ 45)
+  </span>
+</td>
+</tr>
+
+</table>
+
+<br/>
+<br/>
+
+
+<div class="sourceCode"><i>1</i>&nbsp;/*
+<i>2</i>&nbsp; * Copyright (c) 2020 Ubique Innovation AG &lt;https://www.ubique.ch&gt;
+<i>3</i>&nbsp; *
+<i>4</i>&nbsp; * This Source Code Form is subject to the terms of the Mozilla Public
+<i>5</i>&nbsp; * License, v. 2.0. If a copy of the MPL was not distributed with this
+<i>6</i>&nbsp; * file, You can obtain one at https://mozilla.org/MPL/2.0/.
+<i>7</i>&nbsp; *
+<i>8</i>&nbsp; * SPDX-License-Identifier: MPL-2.0
+<i>9</i>&nbsp; */
+<i>10</i>&nbsp;
+<i>11</i>&nbsp;package org.dpppt.android.app.util;
+<i>12</i>&nbsp;
+<i>13</i>&nbsp;import android.os.Bundle;
+<i>14</i>&nbsp;import android.view.LayoutInflater;
+<i>15</i>&nbsp;import android.view.View;
+<i>16</i>&nbsp;import android.view.ViewGroup;
+<i>17</i>&nbsp;import android.widget.Button;
+<i>18</i>&nbsp;import android.widget.TextView;
+<i>19</i>&nbsp;import androidx.annotation.NonNull;
+<i>20</i>&nbsp;import androidx.annotation.Nullable;
+<i>21</i>&nbsp;import androidx.annotation.StringRes;
+<i>22</i>&nbsp;import androidx.fragment.app.DialogFragment;
+<i>23</i>&nbsp;
+<i>24</i>&nbsp;import org.dpppt.android.app.R;
+<i>25</i>&nbsp;
+<b class="nc"><i>26</i>&nbsp;public class InfoDialog extends DialogFragment {</b>
+<i>27</i>&nbsp;
+<i>28</i>&nbsp;	private static final String ARG_TEXT_ID = &quot;arg_text_id&quot;;
+<i>29</i>&nbsp;	private static final String ARG_BUTTON_LABEL_ID = &quot;arg_button_label_id&quot;;
+<i>30</i>&nbsp;	private static final String ARG_TEXT_STRING = &quot;arg_text_string&quot;;
+<i>31</i>&nbsp;	private static final String ARG_DETAIL_STRING = &quot;ARG_DETAIL_STRING&quot;;
+<i>32</i>&nbsp;
+<i>33</i>&nbsp;	private Button button;
+<i>34</i>&nbsp;	private View.OnClickListener onClickListener;
+<i>35</i>&nbsp;
+<i>36</i>&nbsp;	public static InfoDialog newInstance(@StringRes int text) {
+<b class="nc"><i>37</i>&nbsp;		Bundle args = new Bundle();</b>
+<b class="nc"><i>38</i>&nbsp;		args.putInt(ARG_TEXT_ID, text);</b>
+<b class="nc"><i>39</i>&nbsp;		InfoDialog fragment = new InfoDialog();</b>
+<b class="nc"><i>40</i>&nbsp;		fragment.setArguments(args);</b>
+<b class="nc"><i>41</i>&nbsp;		return fragment;</b>
+<i>42</i>&nbsp;	}
+<i>43</i>&nbsp;
+<i>44</i>&nbsp;	public static InfoDialog newInstanceWithButtonLabel(@StringRes int text, @StringRes int buttonLabelId) {
+<b class="nc"><i>45</i>&nbsp;		Bundle args = new Bundle();</b>
+<b class="nc"><i>46</i>&nbsp;		args.putInt(ARG_TEXT_ID, text);</b>
+<b class="nc"><i>47</i>&nbsp;		args.putInt(ARG_BUTTON_LABEL_ID, buttonLabelId);</b>
+<b class="nc"><i>48</i>&nbsp;		InfoDialog fragment = new InfoDialog();</b>
+<b class="nc"><i>49</i>&nbsp;		fragment.setArguments(args);</b>
+<b class="nc"><i>50</i>&nbsp;		return fragment;</b>
+<i>51</i>&nbsp;	}
+<i>52</i>&nbsp;
+<i>53</i>&nbsp;	public static InfoDialog newInstanceWithDetail(String text, String detail) {
+<b class="nc"><i>54</i>&nbsp;		Bundle args = new Bundle();</b>
+<b class="nc"><i>55</i>&nbsp;		args.putString(ARG_TEXT_STRING, text);</b>
+<b class="nc"><i>56</i>&nbsp;		args.putString(ARG_DETAIL_STRING, detail);</b>
+<b class="nc"><i>57</i>&nbsp;		InfoDialog fragment = new InfoDialog();</b>
+<b class="nc"><i>58</i>&nbsp;		fragment.setArguments(args);</b>
+<b class="nc"><i>59</i>&nbsp;		return fragment;</b>
+<i>60</i>&nbsp;	}
+<i>61</i>&nbsp;
+<i>62</i>&nbsp;	public static InfoDialog newInstance(String text) {
+<b class="nc"><i>63</i>&nbsp;		Bundle args = new Bundle();</b>
+<b class="nc"><i>64</i>&nbsp;		args.putString(ARG_TEXT_STRING, text);</b>
+<b class="nc"><i>65</i>&nbsp;		InfoDialog fragment = new InfoDialog();</b>
+<b class="nc"><i>66</i>&nbsp;		fragment.setArguments(args);</b>
+<b class="nc"><i>67</i>&nbsp;		return fragment;</b>
+<i>68</i>&nbsp;	}
+<i>69</i>&nbsp;
+<i>70</i>&nbsp;	@Nullable
+<i>71</i>&nbsp;	@Override
+<i>72</i>&nbsp;	public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
+<i>73</i>&nbsp;			@Nullable Bundle savedInstanceState) {
+<b class="nc"><i>74</i>&nbsp;		return inflater.inflate(R.layout.dialog_info, container, false);</b>
+<i>75</i>&nbsp;	}
+<i>76</i>&nbsp;
+<i>77</i>&nbsp;	@Override
+<i>78</i>&nbsp;	public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+<b class="nc"><i>79</i>&nbsp;		super.onViewCreated(view, savedInstanceState);</b>
+<b class="nc"><i>80</i>&nbsp;		Bundle args = getArguments();</b>
+<i>81</i>&nbsp;
+<b class="nc"><i>82</i>&nbsp;		TextView textView = view.findViewById(R.id.dialog_info_text);</b>
+<b class="nc"><i>83</i>&nbsp;		if (args.containsKey(ARG_TEXT_ID)) {</b>
+<b class="nc"><i>84</i>&nbsp;			textView.setText(args.getInt(ARG_TEXT_ID));</b>
+<i>85</i>&nbsp;		} else {
+<b class="nc"><i>86</i>&nbsp;			textView.setText(args.getString(ARG_TEXT_STRING));</b>
+<i>87</i>&nbsp;		}
+<i>88</i>&nbsp;
+<b class="nc"><i>89</i>&nbsp;		TextView detailView = view.findViewById(R.id.dialog_info_subtext);</b>
+<b class="nc"><i>90</i>&nbsp;		String detail = args.getString(ARG_DETAIL_STRING);</b>
+<b class="nc"><i>91</i>&nbsp;		if (detail != null) {</b>
+<b class="nc"><i>92</i>&nbsp;			detailView.setVisibility(View.VISIBLE);</b>
+<b class="nc"><i>93</i>&nbsp;			detailView.setText(detail);</b>
+<i>94</i>&nbsp;		} else {
+<b class="nc"><i>95</i>&nbsp;			detailView.setVisibility(View.GONE);</b>
+<i>96</i>&nbsp;		}
+<i>97</i>&nbsp;
+<b class="nc"><i>98</i>&nbsp;		button = view.findViewById(R.id.dialog_info_button);</b>
+<b class="nc"><i>99</i>&nbsp;		if (args.containsKey(ARG_BUTTON_LABEL_ID)) button.setText(args.getInt(ARG_BUTTON_LABEL_ID));</b>
+<b class="nc"><i>100</i>&nbsp;		button.setOnClickListener(v -&gt; {</b>
+<b class="nc"><i>101</i>&nbsp;			if (onClickListener != null) {</b>
+<b class="nc"><i>102</i>&nbsp;				onClickListener.onClick(v);</b>
+<i>103</i>&nbsp;			} else {
+<b class="nc"><i>104</i>&nbsp;				getDialog().dismiss();</b>
+<i>105</i>&nbsp;			}
+<i>106</i>&nbsp;		});
+<i>107</i>&nbsp;	}
+<i>108</i>&nbsp;
+<i>109</i>&nbsp;	@Override
+<i>110</i>&nbsp;	public void onStart() {
+<b class="nc"><i>111</i>&nbsp;		super.onStart();</b>
+<b class="nc"><i>112</i>&nbsp;		getDialog().getWindow().setLayout(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT);</b>
+<i>113</i>&nbsp;	}
+<i>114</i>&nbsp;
+<i>115</i>&nbsp;	public void setButtonOnClickListener(View.OnClickListener onClickListener) {
+<b class="nc"><i>116</i>&nbsp;		this.onClickListener = onClickListener;</b>
+<i>117</i>&nbsp;	}
+<i>118</i>&nbsp;
+<i>119</i>&nbsp;}
+</div>
+</div>
+
+<div class="footer">
+    
+    <div style="float:right;">generated on 2021-01-03 15:49</div>
+</div>
+</body>
+</html>

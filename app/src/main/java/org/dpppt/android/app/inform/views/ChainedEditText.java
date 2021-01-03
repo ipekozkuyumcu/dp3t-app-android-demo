@@ -61,13 +61,16 @@ public class ChainedEditText extends ConstraintLayout {
 		Configuration c = getResources().getConfiguration();
 		float scale = c.fontScale;
 		if (scale > 1) {
-			textViewGroup = LayoutInflater.from(context).inflate(R.layout.view_chained_edit_text_more_space, this, true);
+			textViewGroup = LayoutInflater.from(context).inflate(R.layout.view_chained_edit_text_more_space,
+					this, true);
 		} else {
-			textViewGroup = LayoutInflater.from(context).inflate(R.layout.view_chained_edit_text, this, true);
+			textViewGroup = LayoutInflater.from(context).inflate(R.layout.view_chained_edit_text,
+					this, true);
 		}
 		for (int i = 0; i < NUM_CHARACTERS; i++) {
 			textViews[i] = textViewGroup
-					.findViewById(getResources().getIdentifier(ID_TEXT_FIELD + (i + 1), "id", context.getPackageName()));
+					.findViewById(getResources().getIdentifier(ID_TEXT_FIELD + (i + 1), "id",
+							context.getPackageName()));
 		}
 
 		shadowEditText = new EditText(context);
