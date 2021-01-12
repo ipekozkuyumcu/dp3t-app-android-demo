@@ -20,10 +20,6 @@ public class DateUtils {
 	private static final DateFormat DATE_TIME_FORMAT = SimpleDateFormat.getDateTimeInstance();
 	private static final DateFormat DATE_FORMAT = SimpleDateFormat.getDateInstance();
 
-	public static int sum(int a, int b) {
-		return a+b;
-	}
-
 	public static int getDaysDiff(long date) {
 
 		try {

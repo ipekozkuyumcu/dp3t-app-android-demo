@@ -10,12 +10,6 @@ import static org.junit.Assert.*;
 public class DateUtilsTest {
 
     @Test
-    public void sum() {
-        int sum = DateUtils.sum(2, 3);
-        assertEquals(sum, 5);
-    }
-
-    @Test
     public void getDaysDiff() {
         Calendar calendar = Calendar.getInstance();
         calendar.add(Calendar.DATE, -3);
